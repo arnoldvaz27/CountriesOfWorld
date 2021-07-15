@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
         //Checking whether the device android version is 9/P or above
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
             findViewById(R.id.card).setVisibility(View.VISIBLE);
+            findViewById(R.id.Message).setSelected(true);
         }
 
         //Checking whether the device is connected to internet or not
