@@ -72,11 +72,23 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
             @SuppressLint("StaticFieldLeak")
             class Count extends AsyncTask<Void, Void, List<Country>> {
                 int a;
+                int b;
 
                 @Override
                 protected List<Country> doInBackground(Void... voids) {
                     a = CountryDatabase.getCountryDatabase(getApplicationContext()).countryDao().getDataCount();
                     if (a == 250) {
+                        b = 0;
+                    } else {
+                        b = 1;
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(List<Country> countries) {
+                    super.onPostExecute(countries);
+                    if (b == 0) {
                         Display();
                     } else {
                         @SuppressLint("StaticFieldLeak")
@@ -98,14 +110,7 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
                             }
                         }
                         new Delete().execute();
-
                     }
-                    return null;
-                }
-
-                @Override
-                protected void onPostExecute(List<Country> countries) {
-                    super.onPostExecute(countries);
 
                 }
             }
@@ -114,60 +119,70 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
             @SuppressLint("StaticFieldLeak")
             class Count extends AsyncTask<Void, Void, List<Country>> {
                 int a;
+                int b;
 
                 @Override
                 protected List<Country> doInBackground(Void... voids) {
                     a = CountryDatabase.getCountryDatabase(getApplicationContext()).countryDao().getDataCount();
                     if (a == 250) {
-                        Display();
+                        b = 0;
                     } else {
-                        @SuppressLint("StaticFieldLeak")
-                        class Delete extends AsyncTask<Void, Void, List<Country>> {
-                            @Override
-                            protected List<Country> doInBackground(Void... voids) {
-                                CountryDatabase.getCountryDatabase(getApplicationContext()).countryDao().deleteAll();
-                                return null;
-                            }
-
-                            @Override
-                            protected void onPostExecute(List<Country> countries) {
-                                super.onPostExecute(countries);
-                                if (isConnected()) {
-                                    Fetching();
-                                } else {
-                                    showToast("Please connect to internet, and click on the refresh icon");
-                                }
-                            }
-                        }
-                        new Delete().execute();
-
+                        b = 1;
                     }
                     return null;
-                }
+            }
 
-                @Override
-                protected void onPostExecute(List<Country> countries) {
-                    super.onPostExecute(countries);
+            @Override
+            protected void onPostExecute (List < Country > countries) {
+                super.onPostExecute(countries);
+                if (b == 0) {
+                    Display();
+                } else {
+                    @SuppressLint("StaticFieldLeak")
+                    class Delete extends AsyncTask<Void, Void, List<Country>> {
+                        @Override
+                        protected List<Country> doInBackground(Void... voids) {
+                            CountryDatabase.getCountryDatabase(getApplicationContext()).countryDao().deleteAll();
+                            return null;
+                        }
 
+                        @Override
+                        protected void onPostExecute(List<Country> countries) {
+                            super.onPostExecute(countries);
+                            if (isConnected()) {
+                                Fetching();
+                            } else {
+                                showToast("Please connect to internet, and click on the refresh icon");
+                            }
+                        }
+                    }
+                    new Delete().execute();
                 }
             }
-            new Count().execute();
         }
-        //end of the checking of the network state
-
-        //imageview with click listener, which will delete the data after the user clicks on this view
-        imageView.setOnClickListener(v -> DeletingData());
-
-        //imageview with click listener, which will reload the whole activity without any animation.
-        findViewById(R.id.refresh).setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            finish();
-            overridePendingTransition(0, 0);
-            startActivity(i);
-            overridePendingTransition(0, 0);
-        });
+        new Count().execute();
     }
+    //end of the checking of the network state
+
+    //imageview with click listener, which will delete the data after the user clicks on this view
+        imageView.setOnClickListener(v ->
+
+    DeletingData());
+
+    //imageview with click listener, which will reload the whole activity without any animation.
+    findViewById(R.id.refresh).
+
+    setOnClickListener(v ->
+
+    {
+        Intent i = new Intent(MainActivity.this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(i);
+        overridePendingTransition(0, 0);
+    });
+}
 
     //method for fetching the data from the specified url (api) and saving it in the room database locally
     private void Fetching() {
@@ -198,10 +213,10 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
                             JSONObject details = movies.getJSONObject(j);
                             String title = details.getString("name");
                             String title2 = details.getString("nativeName");
-                            languages += title+" : "+title2 + " ,\n";
+                            languages += title + " : " + title2 + " ,\n";
                         }
-                        languages = languages.replaceAll("null","");
-                        languages = languages.substring(0,languages.length() - 2);
+                        languages = languages.replaceAll("null", "");
+                        languages = languages.substring(0, languages.length() - 2);
                         flag = cityInfo.getString("flag");
                         Country country = new Country();
                         country.setName(countryName);
@@ -298,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
     }
 
     //method for deleting all the data from the room database
-    public void DeletingData(){
+    public void DeletingData() {
         class Delete extends AsyncTask<Void, Void, List<Country>> {
             @Override
             protected List<Country> doInBackground(Void... voids) {
