@@ -34,10 +34,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"deprecation"})
 public class MainActivity extends AppCompatActivity implements CountryListeners {
 
     // declaration of the various views and components
-    ImageView imageView;
+    ImageView imageView, imageView1;
     String countryName, countryBorders, population, subregion, region, capital, flag, languages;
     private RecyclerView countryRecyclerView;
     private List<Country> countriesList;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
         //initializing
         loadingBar = new ProgressDialog(this);
         imageView = findViewById(R.id.delete);
+        imageView1 = findViewById(R.id.more);
         countryRecyclerView = findViewById(R.id.RecyclerView);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MainActivity.this);
@@ -131,59 +133,60 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
                         b = 1;
                     }
                     return null;
-            }
+                }
 
-            @Override
-            protected void onPostExecute (List < Country > countries) {
-                super.onPostExecute(countries);
-                if (b == 0) {
-                    Display();
-                } else {
-                    @SuppressLint("StaticFieldLeak")
-                    class Delete extends AsyncTask<Void, Void, List<Country>> {
-                        @Override
-                        protected List<Country> doInBackground(Void... voids) {
-                            CountryDatabase.getCountryDatabase(getApplicationContext()).countryDao().deleteAll();
-                            return null;
-                        }
+                @Override
+                protected void onPostExecute(List<Country> countries) {
+                    super.onPostExecute(countries);
+                    if (b == 0) {
+                        Display();
+                    } else {
+                        @SuppressLint("StaticFieldLeak")
+                        class Delete extends AsyncTask<Void, Void, List<Country>> {
+                            @Override
+                            protected List<Country> doInBackground(Void... voids) {
+                                CountryDatabase.getCountryDatabase(getApplicationContext()).countryDao().deleteAll();
+                                return null;
+                            }
 
-                        @Override
-                        protected void onPostExecute(List<Country> countries) {
-                            super.onPostExecute(countries);
-                            if (isConnected()) {
-                                Fetching();
-                            } else {
-                                showToast("Please connect to internet, and click on the refresh icon");
+                            @Override
+                            protected void onPostExecute(List<Country> countries) {
+                                super.onPostExecute(countries);
+                                if (isConnected()) {
+                                    Fetching();
+                                } else {
+                                    showToast("Please connect to internet, and click on the refresh icon");
+                                }
                             }
                         }
+                        new Delete().execute();
                     }
-                    new Delete().execute();
                 }
             }
+            new Count().execute();
         }
-        new Count().execute();
+        //end of the checking of the network state
+
+        //imageview with click listener, which will delete the data after the user clicks on this view
+        imageView.setOnClickListener(v -> DeletingData());
+
+
+        imageView1.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), MoreMenu.class)));
+
+        //imageview with click listener, which will reload the whole activity without any animation.
+        findViewById(R.id.refresh).
+
+                setOnClickListener(v ->
+
+                {
+                    Intent i = new Intent(MainActivity.this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    finish();
+                    overridePendingTransition(0, 0);
+                    startActivity(i);
+                    overridePendingTransition(0, 0);
+                });
     }
-    //end of the checking of the network state
-
-    //imageview with click listener, which will delete the data after the user clicks on this view
-        imageView.setOnClickListener(v ->
-
-    DeletingData());
-
-    //imageview with click listener, which will reload the whole activity without any animation.
-    findViewById(R.id.refresh).
-
-    setOnClickListener(v ->
-
-    {
-        Intent i = new Intent(MainActivity.this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(i);
-        overridePendingTransition(0, 0);
-    });
-}
 
     //method for fetching the data from the specified url (api) and saving it in the room database locally
     private void Fetching() {
@@ -295,6 +298,7 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
                         .countryDao().getAllCountries();
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             protected void onPostExecute(List<Country> countries) {
                 super.onPostExecute(countries);
@@ -315,6 +319,7 @@ public class MainActivity extends AppCompatActivity implements CountryListeners 
 
     //method for deleting all the data from the room database
     public void DeletingData() {
+        @SuppressLint("StaticFieldLeak")
         class Delete extends AsyncTask<Void, Void, List<Country>> {
             @Override
             protected List<Country> doInBackground(Void... voids) {
