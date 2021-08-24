@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.arnold.countriesofworld">
+    package="com.arnoldvaz27.countriesofworld.Activity">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,15 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CountriesOfWorld"
         tools:ignore="AllowBackup">
-        <activity android:name=".Activity.MoreMenu"/>
-        <activity android:name="com.arnold.countriesofworld.Activity.SplashScreen">
+        <activity android:name=".MoreMenu"/>
+        <activity android:name=".SplashScreen"
+            tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.arnold.countriesofworld.Activity.MainActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

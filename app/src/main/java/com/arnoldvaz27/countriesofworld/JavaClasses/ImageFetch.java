@@ -1,11 +1,11 @@
-package com.arnold.countriesofworld.JavaClasses;
+package com.arnoldvaz27.countriesofworld.JavaClasses;
 
 import android.content.Context;
 import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.arnold.countriesofworld.R;
+import com.arnoldvaz27.countriesofworld.Activity.R;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou;
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYouListener;
 

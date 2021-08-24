@@ -1,4 +1,4 @@
-package com.arnold.countriesofworld.Adapter;
+package com.arnoldvaz27.countriesofworld.Adapter;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.arnold.countriesofworld.R;
-import com.arnold.countriesofworld.JavaClasses.ImageFetch;
-import com.arnold.countriesofworld.entites.Country;
-import com.arnold.countriesofworld.listeners.CountryListeners;
+import com.arnoldvaz27.countriesofworld.Activity.R;
+import com.arnoldvaz27.countriesofworld.JavaClasses.ImageFetch;
+import com.arnoldvaz27.countriesofworld.entites.Country;
+import com.arnoldvaz27.countriesofworld.listeners.CountryListeners;
 
 import java.util.List;
 

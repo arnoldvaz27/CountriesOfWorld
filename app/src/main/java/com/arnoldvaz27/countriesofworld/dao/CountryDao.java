@@ -1,11 +1,11 @@
-package com.arnold.countriesofworld.dao;
+package com.arnoldvaz27.countriesofworld.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.arnold.countriesofworld.entites.Country;
+import com.arnoldvaz27.countriesofworld.entites.Country;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.arnold.countriesofworld.Activity;
+package com.arnoldvaz27.countriesofworld.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,12 +20,11 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.arnold.countriesofworld.Adapter.CountryAdapter;
-import com.arnold.countriesofworld.JavaClasses.MySingleton;
-import com.arnold.countriesofworld.R;
-import com.arnold.countriesofworld.database.CountryDatabase;
-import com.arnold.countriesofworld.entites.Country;
-import com.arnold.countriesofworld.listeners.CountryListeners;
+import com.arnoldvaz27.countriesofworld.Adapter.CountryAdapter;
+import com.arnoldvaz27.countriesofworld.JavaClasses.MySingleton;
+import com.arnoldvaz27.countriesofworld.database.CountryDatabase;
+import com.arnoldvaz27.countriesofworld.entites.Country;
+import com.arnoldvaz27.countriesofworld.listeners.CountryListeners;
 
 import org.json.JSONArray;
 import org.json.JSONException;

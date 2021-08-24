@@ -1,4 +1,4 @@
-package com.arnold.countriesofworld;
+package com.arnoldvaz27.countriesofworld;
 
 import org.junit.Test;
 

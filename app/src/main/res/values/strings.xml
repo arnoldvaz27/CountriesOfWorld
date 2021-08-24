@@ -13,4 +13,11 @@
     <string name="for_developer">For Developer</string>
     <string name="website">Website</string>
     <string name="youtube">YouTube</string>
+    <string name="click_here_to_download_countries_of_asia">Click here to download countries of Asia</string>
+    <string name="get_more_apps_on_programming_drive_app_store_click_here">Get More Apps on Programming Drive App Store. Click Here</string>
+    <string name="programming_drive_app_store">Programming Drive App Store</string>
+    <string name="click_here_to_download_countries_of_europe">Click here to download countries of Europe</string>
+    <string name="click_here_to_download_countries_of_africa">Click here to download countries of Africa</string>
+    <string name="click_here_to_download_countries_of_oceanic">Click here to download countries of Oceanic</string>
+    <string name="click_here_to_download_countries_of_america">Click here to download countries of Oceanic</string>
 </resources>
